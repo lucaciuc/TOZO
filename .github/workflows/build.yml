@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
   pull_request:
     branches:
       - main
@@ -36,7 +34,7 @@ jobs:
         path: ./publish/TozoWindowsApp.exe
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -49,9 +47,12 @@ jobs:
         name: TozoWindowsApp-win-x64
         path: ./publish
 
-    - name: Create Release
+    - name: Update Latest Release
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: latest
+        name: "Latest Build"
         files: ./publish/TozoWindowsApp.exe
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
