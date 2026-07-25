@@ -1,0 +1,66 @@
+<UserControl x:Class="TozoWindowsApp.Views.AncView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ble="clr-namespace:TozoWindowsApp.Ble"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="420"
+             Background="#222327">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="16,24,16,16">
+            <Button Command="{Binding CloseViewCommand}" 
+                    Style="{StaticResource MaterialDesignToolButton}" 
+                    HorizontalAlignment="Left" 
+                    Foreground="White">
+                <materialDesign:PackIcon Kind="ChevronLeft" Width="24" Height="24"/>
+            </Button>
+            <TextBlock Text="NOISE CANCELLATION" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="16,0,16,16">
+
+                <TextBlock Text="Modes" FontSize="16" FontWeight="SemiBold" Foreground="#AAAAAA" Margin="0,0,0,16"/>
+
+                <UniformGrid Columns="2">
+                    <RadioButton Command="{Binding SetAncModeCommand}" CommandParameter="{x:Static ble:TozoProtocol+AncMode.AncOff}" 
+                                 IsChecked="{Binding CurrentAncMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static ble:TozoProtocol+AncMode.AncOff}}"
+                                 Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" Content="Normal Mode" Foreground="White" BorderBrush="#444444" Margin="4" Height="50"/>
+                    <RadioButton Command="{Binding SetAncModeCommand}" CommandParameter="{x:Static ble:TozoProtocol+AncMode.AncOn}" 
+                                 IsChecked="{Binding CurrentAncMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static ble:TozoProtocol+AncMode.AncOn}}"
+                                 Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" Content="Noise Cancel" Foreground="White" BorderBrush="#444444" Margin="4" Height="50"/>
+                    
+                    <RadioButton Command="{Binding SetAncModeCommand}" CommandParameter="{x:Static ble:TozoProtocol+AncMode.Transparency}" 
+                                 IsChecked="{Binding CurrentAncMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static ble:TozoProtocol+AncMode.Transparency}}"
+                                 Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" Content="Transparency" Foreground="White" BorderBrush="#444444" Margin="4" Height="50"/>
+                    <RadioButton Command="{Binding SetAncModeCommand}" CommandParameter="{x:Static ble:TozoProtocol+AncMode.ReduceWindNoise}" 
+                                 IsChecked="{Binding CurrentAncMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static ble:TozoProtocol+AncMode.ReduceWindNoise}}"
+                                 Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" Content="Wind Noise" Foreground="White" BorderBrush="#444444" Margin="4" Height="50"/>
+                    
+                    <RadioButton Command="{Binding SetAncModeCommand}" CommandParameter="{x:Static ble:TozoProtocol+AncMode.Leisure}" 
+                                 IsChecked="{Binding CurrentAncMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static ble:TozoProtocol+AncMode.Leisure}}"
+                                 Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" Content="Leisure Mode" Foreground="White" BorderBrush="#444444" Margin="4" Height="50"/>
+                    <RadioButton Command="{Binding SetAncModeCommand}" CommandParameter="{x:Static ble:TozoProtocol+AncMode.Adaptive}" 
+                                 IsChecked="{Binding CurrentAncMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static ble:TozoProtocol+AncMode.Adaptive}}"
+                                 Style="{StaticResource MaterialDesignChoiceChipOutlineRadioButton}" Content="Adaptive" Foreground="White" BorderBrush="#444444" Margin="4" Height="50"/>
+                </UniformGrid>
+
+                <materialDesign:Card UniformCornerRadius="8" Background="#2C2F36" Padding="16" Margin="0,24,0,0">
+                    <Grid>
+                        <TextBlock Text="Remember my settings" Foreground="White" FontSize="15" VerticalAlignment="Center"/>
+                        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" IsChecked="True" HorizontalAlignment="Right"/>
+                    </Grid>
+                </materialDesign:Card>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
