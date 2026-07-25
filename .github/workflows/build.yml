@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
@@ -30,7 +30,7 @@ jobs:
       run: dotnet publish TozoWindowsApp.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o ./publish
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: TozoWindowsApp-win-x64
         path: ./publish/TozoWindowsApp.exe
@@ -44,13 +44,13 @@ jobs:
 
     steps:
     - name: Download Artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: TozoWindowsApp-win-x64
         path: ./publish
 
     - name: Create Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: ./publish/TozoWindowsApp.exe
       env:
