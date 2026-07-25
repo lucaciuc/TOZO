@@ -57,7 +57,7 @@ With the reverse-engineering complete and the backend stabilized, we wrapped eve
 ## Download & Installation
 Go to the [Releases](../../releases) tab to download the latest `.exe`.
 
-## 🛠 Building from Source
+## Building from Source
 This project requires the .NET 8.0 SDK.
 ```cmd
 git clone https://github.com/lucaciuc/TOZO.git
